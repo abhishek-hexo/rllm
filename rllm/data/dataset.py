@@ -128,6 +128,7 @@ class DatasetRegistry:
 
     # Path to the registry file mapping dataset names to their files
     _REGISTRY_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "registry")
+    print(f"Registry directory: {_REGISTRY_DIR}")
     _REGISTRY_FILE = os.path.join(_REGISTRY_DIR, "dataset_registry.json")
     _DATASET_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "datasets")
 
