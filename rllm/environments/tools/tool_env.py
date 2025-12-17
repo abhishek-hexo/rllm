@@ -118,7 +118,23 @@ class ToolEnvironment(BaseEnv):
 
         def execute_tool(tool_call):
             tool_name = tool_call["function"]["name"]
-            tool_args = json.loads(tool_call["function"]["arguments"])
+            # Changes to always pass datasheet_id to the tool.
+            raw_args = tool_call.get("function", {}).get("arguments", {})
+            if isinstance(raw_args, str):
+                try:
+                    tool_args = json.loads(raw_args)
+                except Exception:
+                    tool_args = {}
+            elif isinstance(raw_args, dict):
+                tool_args = raw_args
+            else:
+                tool_args = {}
+
+            # If the dataset/environment task provides a datasheet_id (via VERL `extra_info`),
+            # always override the model-provided value so tools run against the correct datasheet.
+            if isinstance(self.task, dict) and "datasheet_id" in self.task:
+                tool_args["datasheet_id"] = self.task["datasheet_id"]
+
             tool_output = self.tools(tool_name=tool_name, **tool_args)
             tool_output_str = tool_output.to_string()
 

@@ -40,4 +40,5 @@ class MultiTool(Tool):
         if tool_name not in self.tool_map:
             return ToolOutput(name=tool_name, output=f"Tool {tool_name} not found in tool map")
         tool = self.tool_map[tool_name]
+        print(f"Tool {tool_name} called with args: {args} and kwargs: {kwargs}")
         return tool(*args, **kwargs)

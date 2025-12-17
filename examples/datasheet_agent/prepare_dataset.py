@@ -78,9 +78,9 @@ def prepare_dataset():
                 for question in questions_list:
                     processed_data.append({
                         'question': question['question'],
-                        'answer': question['answer'],
+                        'ground_truth': question['answer'],
                         'datasheet_id': datasheet_id,
-                        'type': question['type']
+                        'data_source': question['type'],
                     })
 
             pin_map = os.path.join(line, 'pin_map.json')
@@ -89,9 +89,9 @@ def prepare_dataset():
                 for question in questions_list:
                     processed_data.append({
                         'question': question['question'],
-                        'answer': question['answer'],
+                        'ground_truth': question['answer'],
                         'datasheet_id': datasheet_id,
-                        'type': question['type']
+                        'data_source': question['type'],
                     })
             register_map = os.path.join(line, 'register_map.json')
             if os.path.exists(register_map):
@@ -99,9 +99,9 @@ def prepare_dataset():
                 for question in questions_list:
                     processed_data.append({
                         'question': question['question'],
-                        'answer': question['answer'],
+                        'ground_truth': question['answer'],
                         'datasheet_id': datasheet_id,
-                        'type': question['type']    
+                        'data_source': question['type'],
                     })
         return processed_data
 

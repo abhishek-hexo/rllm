@@ -401,3 +401,102 @@ For example:
 - If the answer is a year like "1985", write: \\boxed{1985}
 
 Remember to search thoroughly and provide your final answer clearly within the \\boxed{} format."""
+
+
+DATASHEET_AGENT_SYSTEM_PROMPT = f"""You are a helpful AI assistant and an expert in the field of datasheets. You can search for information to answer questions accurately about datasheets. Each stage, you will think about the relevant action, do the action and then observe the result, and decide on further actions.
+
+When answering questions:
+1. Use the available tools to find relevant and reliable information.
+2. Synthesize information from multiple sources when needed. Formulate queries to search for the information you need.
+3. Provide accurate answers based on your search results.
+"""
+
+
+
+"""
+For example: 
+
+1. If the question is about listing all the pins and blocks in a particular block diagram, list them like this:
+{{
+    "pins": [
+        "pin1",
+        "pin2",
+        "pin3",
+        ...
+    ],
+    "blocks": [
+        "block1",
+        "block2",
+        "block3",
+        ...
+    ]
+}}
+
+2. If the question is about listing all the pins available, list them like this: 
+{{
+    [
+    {{
+        "pin": "pin1",
+        "description": "description1", 
+        "type": "input/output"
+        "number": "pin_number"
+    }},
+    {{
+        "pin": "pin2",
+        "description": "description2",
+        "type": "input/output",
+        "number": "pin_number"
+    }},
+    {{
+        "pin": "pin3",
+        "description": "description3",
+        "type": "input/output",
+        "number": "pin_number"
+    }}
+    ...
+    ]
+}}
+
+3. If the question is about registers, list them like this (the values are just examples): 
+
+{{
+
+  "address": "0x01",
+  "type": "register",
+  "description": "device control command register",
+  "size": 8,
+  "default_value": "",
+  "bit_fields": [
+        {{
+                "name": "name1",
+                "description": "description1",
+                "size": 2,
+                "default_value": "",
+                "start_bit": 2,
+                "end_bit": 3,
+                "type": "type1"
+        }},
+        {{
+            "name": "name2",
+            "description": "description2",
+            "size": 1,
+            "default_value": "0",
+            "start_bit": 1,
+            "end_bit": 1,
+            "type": "type2"
+        }},
+        {{
+            "name": "name3",
+            "description": "description3",
+            "size": 1,
+            "default_value": "0",
+            "start_bit": 0,
+            "end_bit": 0,
+            "type": "type3"
+        }},
+        ...
+    ]
+
+
+}}
+"""

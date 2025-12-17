@@ -20,7 +20,7 @@ class LocalDatasheetFigureRetriever(Tool):
     """
 
     NAME = "pdf_figure_search"
-    DESCRIPTION = "Search for figures in a datasheet PDF using a dense retrieval server with E5 embeddings"
+    DESCRIPTION = "Search for figures in a datasheet PDF using a dense retrieval server with E5 embeddings. This returns the text description of the figure relevant to the query."
 
     def __init__(
         self,
@@ -28,7 +28,7 @@ class LocalDatasheetFigureRetriever(Tool):
         description: str = DESCRIPTION,
         server_url: str = None,
         timeout: float = 30.0,
-        max_results: int = 10,
+        max_results: int = 3,
     ):
         """
         Initialize the Local Retrieval Tool.
@@ -78,9 +78,9 @@ class LocalDatasheetFigureRetriever(Tool):
                     "properties": {
                         "query": {"type": "string", "description": "Search query to retrieve relevant documents"},
                         "top_k": {"type": "integer", "description": f"Number of results to return (default: {self.max_results})", "minimum": 1, "maximum": 50},
-                        "datasheet_id": {"type": "string", "description": "The ID of the datasheet to search in"},
+                        # "datasheet_id": {"type": "string", "description": "The ID of the datasheet to search in"},
                     },
-                    "required": ["query", "datasheet_id"],
+                    "required": ["query"], # , "datasheet_id"
                 },
             },
         }
@@ -161,7 +161,7 @@ class LocalDatasheetTextRetriever(Tool):
     """
 
     NAME = "pdf_text_search"
-    DESCRIPTION = "Search for text in a datasheet PDF using a dense retrieval server with E5 embeddings"
+    DESCRIPTION = "Search for text in a datasheet PDF using a dense retrieval server with E5 embeddings. This returns the text relevant to the query."
 
     def __init__(
         self,
@@ -169,7 +169,7 @@ class LocalDatasheetTextRetriever(Tool):
         description: str = DESCRIPTION,
         server_url: str = None,
         timeout: float = 30.0,
-        max_results: int = 10,
+        max_results: int = 3,
     ):
         """
         Initialize the Local Retrieval Tool.
@@ -219,9 +219,9 @@ class LocalDatasheetTextRetriever(Tool):
                     "properties": {
                         "query": {"type": "string", "description": "Search query to retrieve relevant documents"},
                         "top_k": {"type": "integer", "description": f"Number of results to return (default: {self.max_results})", "minimum": 1, "maximum": 50},
-                        "datasheet_id": {"type": "string", "description": "The ID of the datasheet to search in"},
+                        # "datasheet_id": {"type": "string", "description": "The ID of the datasheet to search in"},
                     },
-                    "required": ["query", "datasheet_id"],
+                    "required": ["query"], # , "datasheet_id"
                 },
             },
         }
@@ -319,7 +319,7 @@ class LocalDatasheetTableRetriever(Tool):
     """
 
     NAME = "pdf_table_search"
-    DESCRIPTION = "Search for tables in a datasheet PDF using a dense retrieval server with E5 embeddings"
+    DESCRIPTION = "Search for tables in a datasheet PDF using a dense retrieval server with E5 embeddings. This returns the table name and the table contents of the tables relevant to the query."
 
     def __init__(
         self,
@@ -327,7 +327,7 @@ class LocalDatasheetTableRetriever(Tool):
         description: str = DESCRIPTION,
         server_url: str = None,
         timeout: float = 30.0,
-        max_results: int = 10,
+        max_results: int = 3,
     ):
         """
         Initialize the Local Retrieval Tool.
@@ -377,9 +377,9 @@ class LocalDatasheetTableRetriever(Tool):
                     "properties": {
                         "query": {"type": "string", "description": "Search query to retrieve relevant tables"},
                         "top_k": {"type": "integer", "description": f"Number of results to return (default: {self.max_results})", "minimum": 1, "maximum": 50},
-                        "datasheet_id": {"type": "string", "description": "The ID of the datasheet to search in"},
+                        # "datasheet_id": {"type": "string", "description": "The ID of the datasheet to search in"},
                     },
-                    "required": ["query", "datasheet_id"],
+                    "required": ["query"], # , "datasheet_id"
                 },
             },
         }

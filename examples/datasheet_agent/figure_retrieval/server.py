@@ -64,7 +64,7 @@ def _render_pdf_page_to_data_url(
 def call_openrouter_vision_markdown(
     image_data_urls: List[str],
     query_hint: Optional[str],
-    model: str = "google/gemini-2.5-pro",
+    model: str = "google/gemma-3-27b-it:free",
     temperature: float = 0.0,
     max_tokens: Optional[int] = None
 ) -> str:
@@ -89,7 +89,8 @@ def call_openrouter_vision_markdown(
     # OpenRouter accepts OpenAI-format messages where content can be a list of parts
     messages.append({"role": "user", "content": user_content})
 
-    url = "https://openrouter.ai/api/v1/chat/completions"
+    # url = "https://openrouter.ai/api/v1/chat/completions"
+    url = "http://localhost:8005/v1/chat/completions"
     headers = {"Authorization": f"Bearer {OPENROUTER_API_KEY}", "Content-Type": "application/json"}
     payload = {
         "model": model,
@@ -130,7 +131,7 @@ class LocalDatasheetFigureRetriever:
         figures = [{"figure_description": figure_metadata[idx]["figure_description"], "page_number": figure_metadata[idx]["page_number"], "score": float(score)} for score, idx in zip(scores[0], indices[0], strict=False) if idx < len(figure_metadata)]
 
         image_urls = self.get_figure_data_urls(figures, datasheet_id)
-        response_from_vision_llm = call_openrouter_vision_markdown(image_urls, query)
+        response_from_vision_llm = call_openrouter_vision_markdown(image_urls, query, model='gemma-27b-it')
         return {'response': response_from_vision_llm}
 
     def get_figure_data_urls(self, figures: List[dict[str, Any]], datasheet_id: str) -> List[str]:
